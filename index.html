@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&amp;display=swap" rel="stylesheet">
@@ -12,59 +12,68 @@
             box-sizing:border-box;
             text-align:center;
             font-family: Readex Pro, sans-serif;
-            font-weight:600;
+            font-weight:500;
         }
         
         body{
             direction:rtl;
-            bborder:1px solid black;
             background-color: #1e1e3f;
         }
         
         h1,h2,h3{
-            margin:0px auto 10px;
+            margin:0px auto 20px;
             padding:0;
-            width:100%;
-            bborder:1px solid red;
-            ttext-wrap: nowrap;
+            width:fit-content;
         }
         
         #header{
             h1,h2{
                 color:white;
+                margin-bottom:20px;                
             }
             
             a{
-                ttext-decoration:none;
                 color:white;
             }
+            
+            #note{
+                background-color:red;
+                width:fit-content;
+                padding:10px;
+                border-radius:10px;
+                font-weight:500;
+            }
+            
+            #view{
+                background-color:lightgreen;
+                color:black;
+                padding:10px;
+                border-radius:10px;
+                cursor:pointer;
+            }
+                                    
         }
         
         #cards{
             display:flex;
             justify-content:center;
             align-content:center;
-            fflex-direction:column;
             flex-wrap:wrap;
-            width:min(95%,500px);
             width:95%;
             height:100%;
             gap:10px;
-            bborder:1px solid red;
             margin:10px auto;
         }
         
         .card{
-            display:flex
+            display:flex;
             flex-direction:column;
             justify-content:space-around;          
             align-items:center;
-            border:1px solid black;           
             margin:0 auto;
             width:49%;
             background-color:lightgreen;
             border-radius:10px;
-            padding:10px;
             
             #company{
                 background-color:darkblue;
@@ -72,31 +81,108 @@
                 width:fit-content;
                 margin:10px auto;
                 border-radius:10px;
-                font-size:25px;
-                padding:5px 10px;           
+                padding:5px; 
             }
             
             #name{
                 width:fit-content;
                 background-color:yellow;                   
-                margin:0px auto 10px;
-                border-radius:20px;
-                padding:5px 10px;             
+                margin:10px auto;
+                border-radius:10px;
+                padding:5px;
+            }
+            
+            h2{
+                font-size:30px;
             }
         }
+        
+        table{
+            border-collapse: collapse;
+            width:100%;
+            overflow-x:auto;
+            margin:10px auto;
+            border:1px solid white;
+            display:none;
+            
+            tr{
+                border-bottom:2px solid white;
+            }
+        
+        th{
+            background-color:purple;
+            color:white;
+            padding:10px;
+            font-size:32px;
+            text-wrap: nowrap;
+            width:100%;
+        }
+        
+        td{
+            padding:10px;
+            color:white;
+            text-wrap: nowrap;
+            font-size:32px;
+            width:100%;
+        }
+        
+        tr:nth-child(even){
+            background-color:lightgreen;
+            td{
+                color:black;
+            }
+        }
+        }
+        
+        @media (max-width: 768px) {
+                table{
+
+                th,td{
+                    font-size:25px;
+                }
+                }
+            }
         
         @media (max-width: 480px) {
             #header{
              
                 h1,h2{
-                    font-size:20px;
-                    
+                    font-size:17px;
+                    margin-bottom:10px;
+                }
+                
+                #note{
+                    padding:5px;
                 }
         }
         
             .card{
-                width:95%;
+                width:calc(50% - 5px);
+                
+                #company,#name{
+                    font-size:16px;
+                    margin:5px auto;
+                }
+                
+                h2{
+                    font-size:16px;
+                    margin-bottom:10px;
+                }
+                }
+                table{
+                                        
+                    th{
+                        font-size:16px;                        
+                    }
+                    
+                    td{
+                        font-size:16px;
+                    }
+                    
+                }
             }
+            
+            
     </style>
 </head>
 <body>
@@ -105,9 +191,12 @@
         <h2>اتصل بنا : <a href="tel:0770606010">0770606010</a> أو <a href="tel:0553565223">0553565223</a></h2>
         <h2><a href="https://www.google.com/maps/place/PHQ5%2B67J+GSM+BENABDALLAH,+W13%D8%8C+%D8%BA%D9%84%D9%8A%D8%B2%D8%A7%D9%86%E2%80%AD/@35.7387637,0.5584426,15z/data=!4m6!3m5!1s0x12819d6f668e333f:0x32b0f94e9fb77706!8m2!3d35.7387637!4d0.5584426!16s%2Fg%2F11m7v5ncp6">المحل متواجد في الڤرابة مقابل بريد الجزائر</a></h2>
         <h2><a href="https://www.facebook.com/share/16VVxiZzX6/">Facebook : Gsm benabdallah</a></h2>
+        
+            <h1 id="note">ملاحظة : الأسعار ليست ثابثة</h1>
+            <h1 id="view" onclick="view(true)">تغيير طريقة العرض</h1>
     </div>
     <div id="cards">
-           <!-- <div class="card">
+          <!-- <div class="card">
                 <h1 id="company">SAMSUNG</h1>
                 <h2 id="name">A15 4/128</h2>
                 <h2>السعر: <span id="price">47000 دج</span></h2>
@@ -143,17 +232,42 @@
                 <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
             </div> -->
         </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>الشركة</th>
+                    <th>الاسم</th>
+                    <th>السعر</th>
+                    <th>الدفعة</th>
+                    <th>كل شهر</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
 </body>
 <script>
+    
+    let viewCards = localStorage.getItem("viewCards");
+    //console.log(viewCards);
+    if(viewCards !== null){
+        view();
+    }   
+    
+    
+    function fetchGoogleSheetData(){
   fetch("https://docs.google.com/spreadsheets/d/1ZyaZJAP-IpEPaX8wUxmdycdJNuMGAg2SgyQmtYDK-E4/gviz/tq?tqx=out:json&sheet=Sheet1")
     .then(res => res.text())
     .then(text => {
       const json = JSON.parse(text.substring(47).slice(0, -2)); // تنظيف JSON الغريب
       const data = json.table.rows.map(r => r.c.map(c => c?.v));
       //console.log(data); // بياناتك هنا
-      let cards ='';
+      let cards = '';
+      let rows = '';
       
       for(var i = 2 ; i < data.length; i++){
+      
+          if(data[i][3]){
+          
           let company = data[i][0];
           let name = data[i][1] + ' ' + data[i][2];
           let price = data[i][3].toLocaleString();
@@ -162,15 +276,55 @@
           let card =`
               <div class="card">
                 <h1 id="company">${company}</h1>
-                <h2 id="name">${name}</h2>
+                <h1 id="name">${name}</h1>
                 <h2>السعر: <span id="price">${price} دج</span></h2>
                 <h2>الدفعة: <span id="first">${first} دج</span></h2>
                 <h2>كل شهر: <span id="monthly">${monthly} دج</span></h2>
             </div>
           `
           cards += card;
-      }
+          
+          let row = `
+              <tr>
+                  <td id="company">${company}</td>
+                  <td id="name">${name}</td>
+                  <td class="details">${price}</td>
+                  <td class="details">${first}</td>
+                  <td class="details">${monthly}</td>
+              </tr>
+          `
+          
+          rows += row;
+      }//if
+      }//for
+      
       document.getElementById('cards').innerHTML = cards;
-    });
+document.getElementById('tbody').innerHTML = rows;
+    })//fetch
+    
+    }//fetchGoogleSheetData()
+    
+    
+    
+    function view(toggle = false){
+        if(toggle){
+            viewCards = viewCards === 'true' ? 'false' : 'true';
+        }
+    
+    if(viewCards == 'true'){
+        document.getElementById('cards').style.display = 'none';
+        document.getElementById('table').style.display = 'block';
+                       
+        }else{
+            document.getElementById('cards').style.display = 'flex';
+        document.getElementById('table').style.display = 'none';
+                
+        }
+        
+        localStorage.setItem("viewCards",viewCards);
+        
+    }//view()
+    
+    document.addEventListener('DOMContentLoaded', fetchGoogleSheetData);
 </script>
 </html>
