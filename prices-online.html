@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>أسعار التقسيط</title>
+    <style>
+        *{
+            box-sizing:border-box;
+            text-align:center;
+        }
+        
+        body{
+            direction:rtl;
+            border:1px solid black;
+            background-color: #1e1e3f;
+        }
+        
+        h1,h2,h3,span{
+            margin:0 auto;
+            padding:0;
+            width:100%;
+            bborder:1px solid red;
+            ttext-wrap: nowrap;
+        }
+        
+        #header{
+            h1,h2{
+                color:white;
+            }
+            
+            a{
+                ttext-decoration:none;
+                color:white;
+            }
+        }
+        
+        #cards{
+            display:flex;
+            justify-content:center;
+            align-content:center;
+            fflex-direction:column;
+            flex-wrap:wrap;
+            width:min(95%,500px);
+            width:95%;
+            height:100%;
+            gap:10px;
+            bborder:1px solid red;
+            margin:10px auto;
+        }
+        
+        .card{
+            display:flex
+            flex-direction:column;
+            justify-content:space-around;          
+            align-items:center;
+            border:1px solid black;           
+            margin:0 auto;
+            width:49%;
+            background-color:lightgreen;
+            border-radius:10px;                       
+            
+            #company{
+                background-color:darkblue;
+                color:white;
+                width:fit-content;
+                margin:10px auto;
+                border-radius:10px;
+                font-size:25px;
+                padding:5px 10px;           
+            }
+            
+            #name{
+                width:fit-content;
+                background-color:yellow;                   
+                margin:0px auto 10px;
+                border-radius:20px;
+                padding:5px 10px;             
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #header{
+             
+                h1,h2{
+                    font-size:20px;
+                    
+                }
+        }
+        
+            .card{
+                width:95%;
+            }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>مرحبا بكم في محل الإخوة للبيع بالتقسيط</h1>
+        <h2>اتصل بنا : <a href="tel:0770606010">0770606010</a> أو <a href="tel:0553565223">0553565223</a></h2>
+        <h2><a href="https://www.google.com/maps/place/PHQ5%2B67J+GSM+BENABDALLAH,+W13%D8%8C+%D8%BA%D9%84%D9%8A%D8%B2%D8%A7%D9%86%E2%80%AD/@35.7387637,0.5584426,15z/data=!4m6!3m5!1s0x12819d6f668e333f:0x32b0f94e9fb77706!8m2!3d35.7387637!4d0.5584426!16s%2Fg%2F11m7v5ncp6">المحل متواجد في الڤرابة مقابل بريد الجزائر</a></h2>
+        <h2><a href="https://www.facebook.com/share/16VVxiZzX6/">Facebook : Gsm benabdallah</a></h2>
+    </div>
+    <div id="cards">
+            <div class="card">
+                <h1 id="company">SAMSUNG</h1>
+                <h2 id="name">A15 4/128</h2>
+                <h2>السعر: <span id="price">47000 دج</span></h2>
+                <h2>الدفعة: <span id="first">11800 دج</span></h2>
+                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
+            </div>
+            <div class="card">
+                <h1 id="company">REALME</h1>
+                <h2 id="name">C67 8/256</h2>
+                <h2>السعر: <span id="price">47000 دج</span></h2>
+                <h2>الدفعة: <span id="first">11800 دج</span></h2>
+                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
+            </div>
+            <div class="card">
+                <h1 id="company">INFINIX</h1>
+                <h2 id="name">HOT 50 PRO+ 8/256</h2>
+                <h2>السعر: <span id="price">47000 دج</span></h2>
+                <h2>الدفعة: <span id="first">11800 دج</span></h2>
+                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
+            </div>
+            <div class="card">
+                <h1 id="company">OPPO</h1>
+                <h2 id="name">RENO 12F 8/256</h2>
+                <h2>السعر: <span id="price">47000 دج</span></h2>
+                <h2>الدفعة: <span id="first">11800 دج</span></h2>
+                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
+            </div>
+            <div class="card">
+                <h1 id="company">SAMSUNG</h1>
+                <h2 id="name">A15 4/128</h2>
+                <h2>السعر: <span id="price">47000 دج</span></h2>
+                <h2>الدفعة: <span id="first">11800 دج</span></h2>
+                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
+            </div>
+        </div>
+</body>
+<script>
+  fetch("https://docs.google.com/spreadsheets/d/1ZyaZJAP-IpEPaX8wUxmdycdJNuMGAg2SgyQmtYDK-E4/gviz/tq?tqx=out:json&sheet=Sheet1")
+    .then(res => res.text())
+    .then(text => {
+      const json = JSON.parse(text.substring(47).slice(0, -2)); // تنظيف JSON الغريب
+      const data = json.table.rows.map(r => r.c.map(c => c?.v));
+      //console.log(data); // بياناتك هنا
+      let cards ='';
+      
+      for(var i = 2 ; i < data.length; i++){
+          let company = data[i][0];
+          let name = data[i][1] + ' ' + data[i][2];
+          let price = data[i][3].toLocaleString();
+          let first = data[i][4].toLocaleString();
+          let monthly = data[i][5].toLocaleString();
+          let card =`
+              <div class="card">
+                <h1 id="company">${company}</h1>
+                <h2 id="name">${name}</h2>
+                <h2>السعر: <span id="price">${price} دج</span></h2>
+                <h2>الدفعة: <span id="first">${first} دج</span></h2>
+                <h2>كل شهر: <span id="monthly">${monthly} دج</span></h2>
+            </div>
+          `
+          cards += card;
+      }
+      document.getElementById('cards').innerHTML = cards;
+    });
+</script>
+</html>
