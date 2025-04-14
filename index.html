@@ -9,7 +9,7 @@
     <title>أسعار التقسيط</title>
     <style>
         *{
-            box-sizing:border-box;
+            box-sizing: border-box;
             text-align:center;
             font-family: Readex Pro, sans-serif;
             font-weight:500;
@@ -18,41 +18,52 @@
         body{
             direction:rtl;
             background-color: #1e1e3f;
+            margin:0 auto;
         }
         
-        h1,h2,h3{
-            margin:0px auto 20px;
+        h1,h2{
+            margin:0 auto;
             padding:0;
-            width:fit-content;
         }
         
         #header{
+
             h1,h2{
                 color:white;
-                margin-bottom:20px;                
+                margin-bottom:1.5vw;
+                width:fit-content;
+                white-space: nowrap;
+                font-size:2vw;
+            }
+            
+            h1:first-child{
+                margin-top:1vw;
+                font-size: 2.5vw;
             }
             
             a{
                 color:white;
             }
             
+            #note,#view{
+                padding:1vw;
+                border-radius:1vw;                
+            }
+            
             #note{
                 background-color:red;
-                width:fit-content;
-                padding:10px;
-                border-radius:10px;
-                font-weight:500;
             }
             
             #view{
-                background-color:lightgreen;
                 color:black;
-                padding:10px;
-                border-radius:10px;
                 cursor:pointer;
+                
+                &:hover{
+                    scale:1.2;
+                }
             }
                                     
-        }
+        }/* #header */
         
         #cards{
             display:flex;
@@ -61,177 +72,175 @@
             flex-wrap:wrap;
             width:95%;
             height:100%;
-            gap:10px;
-            margin:10px auto;
-        }
+            gap:1vw;
+            margin:2.5vw auto;
+        }/* #cards */
         
         .card{
             display:flex;
             flex-direction:column;
             justify-content:space-around;          
             align-items:center;
-            margin:0 auto;
-            width:49%;
+            width:calc((100% - 3vw) / 4);
             background-color:lightgreen;
-            border-radius:10px;
+            border-radius:1.5vw;
             
-            #company{
+            .company,.name{
+                border-radius:1vw;
+                padding:1vw;
+                width:fit-content;
+                margin-bottom:1vw;          
+            }
+            
+            .company{
                 background-color:darkblue;
-                color:white;
-                width:fit-content;
-                margin:10px auto;
-                border-radius:10px;
-                padding:5px; 
+                color:white;                
+                margin-top:1vw; 
+                font-size: 2.2vw;
             }
             
-            #name{
-                width:fit-content;
+            .name{
                 background-color:yellow;                   
-                margin:10px auto;
-                border-radius:10px;
-                padding:5px;
+                font-size:2vw;
             }
             
-            h2{
-                font-size:30px;
+            .price{
+                font-size:2vw;
+                margin-bottom:1.5vw;
             }
-        }
+        }/* .card */
         
         table{
             border-collapse: collapse;
-            width:100%;
-            overflow-x:auto;
+            width:80%;
             margin:10px auto;
-            border:1px solid white;
+            bborder:1px solid white;
             display:none;
             
             tr{
-                border-bottom:2px solid white;
-            }
-        
-        th{
-            background-color:purple;
-            color:white;
-            padding:10px;
-            font-size:32px;
-            text-wrap: nowrap;
-            width:100%;
-        }
-        
-        td{
-            padding:10px;
-            color:white;
-            text-wrap: nowrap;
-            font-size:32px;
-            width:100%;
-        }
-        
-        tr:nth-child(even){
-            background-color:lightgreen;
-            td{
-                color:black;
-            }
-        }
-        }
-        
-        @media (max-width: 768px) {
-                table{
-
-                th,td{
-                    font-size:25px;
-                }
-                }
-            }
-        
-        @media (max-width: 480px) {
-            #header{
-             
-                h1,h2{
-                    font-size:17px;
-                    margin-bottom:10px;
-                }
+                border-bottom:2px solid black;
+                background-color:yellow;
                 
-                #note{
-                    padding:5px;
-                }
-        }
-        
-            .card{
-                width:calc(50% - 5px);
-                
-                #company,#name{
-                    font-size:16px;
-                    margin:5px auto;
-                }
-                
-                h2{
-                    font-size:16px;
-                    margin-bottom:10px;
-                }
-                }
-                table{
-                                        
-                    th{
-                        font-size:16px;                        
+                &:nth-child(even){
+                    background-color:lightgreen;
+                    td{
+                        color:black;
                     }
+                }
+                
+                &:hover{
+                    background-color:black;
                     
                     td{
-                        font-size:16px;
+                        color:white;
                     }
-                    
                 }
+            }/* tr */
+        
+            th{
+                background-color:purple;
+                color:white;
+                white-space: nowrap;
+                width:100%;
+                padding: 1vw;
+                font-size: 2vw;
             }
+
+            th:first-child{
+                width: 30%;
+            }
+            
+            td{
+                color:white;
+                white-space: nowrap;
+                font-size:32px;
+                color:black;
+                padding: 1vw;
+                font-size: 2vw;
+            }
+            
+        }/* table */
+        
+        .cards-view #cards { display: flex; }
+        .cards-view #table { display: none; }
+
+        .table-view #cards { display: none; }
+        .table-view #table { display: block; }
+
+        .cards-view #view { background-color: yellow; }
+        .table-view #view { background-color: lightgreen; }
+        
+        
+        
+        
+        
+        
+        @media (min-width:769px){
+            .name{
+                font-size:2vw !important;
+            }
+        }
+        
+        
+        
+        
+        
+        
+
+        @media (max-width: 768px) {
+        
+            #header{
+            
+                h1{
+                    font-size: 3vw;
+                    
+                    &:first-child{
+                        font-size: 4vw;
+                    }
+                }
+
+            }/* #header */
+            
+            .card{
+
+                width:calc((100% - 2vw) / 3);
+
+                .company,.name{
+                    padding:.5vw; 
+                    font-size:3.5vw;
+                    white-space:nowrap;
+                }
+                
+                .price{
+                    font-size:3.5vw;
+                }
+            }/* .card */
+
+            table{
+                width:95%;
+                
+                th,td{
+                    font-size:3vw;
+                }
+
+            }/* table */
+            
+        }/* @media */
+              
             
             
     </style>
 </head>
-<body>
+<body class="cards-view">
     <div id="header">
-        <h1>مرحبا بكم في محل الإخوة للبيع بالتقسيط</h1>
-        <h2>اتصل بنا : <a href="tel:0770606010">0770606010</a> أو <a href="tel:0553565223">0553565223</a></h2>
-        <h2><a href="https://www.google.com/maps/place/PHQ5%2B67J+GSM+BENABDALLAH,+W13%D8%8C+%D8%BA%D9%84%D9%8A%D8%B2%D8%A7%D9%86%E2%80%AD/@35.7387637,0.5584426,15z/data=!4m6!3m5!1s0x12819d6f668e333f:0x32b0f94e9fb77706!8m2!3d35.7387637!4d0.5584426!16s%2Fg%2F11m7v5ncp6">المحل متواجد في الڤرابة مقابل بريد الجزائر</a></h2>
-        <h2><a href="https://www.facebook.com/share/16VVxiZzX6/">Facebook : Gsm benabdallah</a></h2>
-        
+        <h1>محل الإخوة للبيع بالتقسيط</h1>
+        <h1 id="phone">اتصل بنا : <a href="tel:0770606010">0770606010</a> أو <a href="tel:0553565223">0553565223</a></h1>
+        <h1 id="map"><a href="https://www.google.com/maps/place/PHQ5%2B67J+GSM+BENABDALLAH,+W13%D8%8C+%D8%BA%D9%84%D9%8A%D8%B2%D8%A7%D9%86%E2%80%AD/@35.7387637,0.5584426,15z/data=!4m6!3m5!1s0x12819d6f668e333f:0x32b0f94e9fb77706!8m2!3d35.7387637!4d0.5584426!16s%2Fg%2F11m7v5ncp6">المحل متواجد في الڤرابة مقابل بريد الجزائر</a></h1>
+        <h1 id="fb"><a href="https://www.facebook.com/share/16VVxiZzX6/">Facebook : Gsm benabdallah</a></h1>        
             <h1 id="note">ملاحظة : الأسعار ليست ثابثة</h1>
             <h1 id="view" onclick="view(true)">تغيير طريقة العرض</h1>
     </div>
-    <div id="cards">
-          <!-- <div class="card">
-                <h1 id="company">SAMSUNG</h1>
-                <h2 id="name">A15 4/128</h2>
-                <h2>السعر: <span id="price">47000 دج</span></h2>
-                <h2>الدفعة: <span id="first">11800 دج</span></h2>
-                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
-            </div>
-            <div class="card">
-                <h1 id="company">REALME</h1>
-                <h2 id="name">C67 8/256</h2>
-                <h2>السعر: <span id="price">47000 دج</span></h2>
-                <h2>الدفعة: <span id="first">11800 دج</span></h2>
-                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
-            </div>
-            <div class="card">
-                <h1 id="company">INFINIX</h1>
-                <h2 id="name">HOT 50 PRO+ 8/256</h2>
-                <h2>السعر: <span id="price">47000 دج</span></h2>
-                <h2>الدفعة: <span id="first">11800 دج</span></h2>
-                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
-            </div>
-            <div class="card">
-                <h1 id="company">OPPO</h1>
-                <h2 id="name">RENO 12F 8/256</h2>
-                <h2>السعر: <span id="price">47000 دج</span></h2>
-                <h2>الدفعة: <span id="first">11800 دج</span></h2>
-                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
-            </div>
-            <div class="card">
-                <h1 id="company">SAMSUNG</h1>
-                <h2 id="name">A15 4/128</h2>
-                <h2>السعر: <span id="price">47000 دج</span></h2>
-                <h2>الدفعة: <span id="first">11800 دج</span></h2>
-                <h2>كل شهر: <span id="monthly">4400 دج</span></h2>
-            </div> -->
-        </div>
+    <div id="cards"></div>
         <table id="table">
             <thead>
                 <tr>
@@ -246,85 +255,132 @@
         </table>
 </body>
 <script>
+        
+    async function fetchGoogleSheetData() {
+        try {
+            const response = await fetch("https://docs.google.com/spreadsheets/d/1ZyaZJAP-IpEPaX8wUxmdycdJNuMGAg2SgyQmtYDK-E4/gviz/tq?tqx=out:json&sheet=Sheet1");
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const text = await response.text();
+
+            // تنظيف JSON الغريب
+            const json = JSON.parse(text.substring(47).slice(0, -2));
+
+            // استخراج البيانات
+            const data = json.table.rows.map(r => r.c.map(c => c?.v));
+            let cards = '';
+            let rows = '';
+            
+            //console.log(data);
+        
+            for(var i = 2 ; i < data.length; i++){
+        
+                if(data[i][3]){
+            
+                    const company = data[i][0];
+                    const name = data[i][1] + ' ' + data[i][2];
+                    const price = data[i][3].toLocaleString();
+                    const first = data[i][4].toLocaleString();
+                    const monthly = data[i][5].toLocaleString();
+                    
+                    
+                        //البطاقات          
+                    const card =`
+                        <div class="card">
+                            <h1 class="company">${company}</h1>
+                            <h1 class="name">${name}</h1>
+                            <h2 class="price total">السعر: <span>${price} دج</span></h2>
+                            <h2 class="price first">الدفعة: <span>${first} دج</span></h2>
+                            <h2 class="price monthly">كل شهر: <span>${monthly} دج</span></h2>
+                        </div>
+                    `
+                    cards += card;
+
+
+                        //صفوف الجدول          
+                    let row = `
+                        <tr>
+                            <td class="company">${company}</td>
+                            <td class="name">${name}</td>
+                            <td class="price total">${price}</td>
+                            <td class="price first">${first}</td>
+                            <td class="price monthly">${monthly}</td>
+                        </tr>
+                    `
+                    
+                    rows += row;
+                }//if
+            }//for
+        
+            document.getElementById('cards').innerHTML = cards;
+            document.getElementById('tbody').innerHTML = rows;
+
+
+            //تصغير الخط عندما يكون الاسم اكبر من عرض البطاقة
+            //alert(window.innerWidth)
+            updateFontSize()
+
+
+        }catch (error) {
+            console.error("حدث خطأ أثناء جلب البيانات:", error.message);
+        }
     
-    let viewCards = localStorage.getItem("viewCards");
-    //console.log(viewCards);
-    if(viewCards !== null){
-        view();
-    }   
-    
-    
-    function fetchGoogleSheetData(){
-  fetch("https://docs.google.com/spreadsheets/d/1ZyaZJAP-IpEPaX8wUxmdycdJNuMGAg2SgyQmtYDK-E4/gviz/tq?tqx=out:json&sheet=Sheet1")
-    .then(res => res.text())
-    .then(text => {
-      const json = JSON.parse(text.substring(47).slice(0, -2)); // تنظيف JSON الغريب
-      const data = json.table.rows.map(r => r.c.map(c => c?.v));
-      //console.log(data); // بياناتك هنا
-      let cards = '';
-      let rows = '';
-      
-      for(var i = 2 ; i < data.length; i++){
-      
-          if(data[i][3]){
-          
-          let company = data[i][0];
-          let name = data[i][1] + ' ' + data[i][2];
-          let price = data[i][3].toLocaleString();
-          let first = data[i][4].toLocaleString();
-          let monthly = data[i][5].toLocaleString();
-          let card =`
-              <div class="card">
-                <h1 id="company">${company}</h1>
-                <h1 id="name">${name}</h1>
-                <h2>السعر: <span id="price">${price} دج</span></h2>
-                <h2>الدفعة: <span id="first">${first} دج</span></h2>
-                <h2>كل شهر: <span id="monthly">${monthly} دج</span></h2>
-            </div>
-          `
-          cards += card;
-          
-          let row = `
-              <tr>
-                  <td id="company">${company}</td>
-                  <td id="name">${name}</td>
-                  <td class="details">${price}</td>
-                  <td class="details">${first}</td>
-                  <td class="details">${monthly}</td>
-              </tr>
-          `
-          
-          rows += row;
-      }//if
-      }//for
-      
-      document.getElementById('cards').innerHTML = cards;
-document.getElementById('tbody').innerHTML = rows;
-    })//fetch
     
     }//fetchGoogleSheetData()
     
+
+
+    //تخزين الشكل في lolacStotage    
+    let localView = localStorage.getItem('localView');
+    
+    if(localView !== null){
+        document.body.className = localView;
+    }//if
     
     
+    
+       
+    //دالة تغيير الشكل    
     function view(toggle = false){
-        if(toggle){
-            viewCards = viewCards === 'true' ? 'false' : 'true';
-        }
     
-    if(viewCards == 'true'){
-        document.getElementById('cards').style.display = 'none';
-        document.getElementById('table').style.display = 'block';
-                       
-        }else{
-            document.getElementById('cards').style.display = 'flex';
-        document.getElementById('table').style.display = 'none';
-                
-        }
-        
-        localStorage.setItem("viewCards",viewCards);
-        
+    if(toggle){
+        document.body.classList.toggle('table-view');
+        document.body.classList.toggle('cards-view');
+    }//if
+
+    localView = document.body.className;
+
+    localStorage.setItem('localView',localView);
+
     }//view()
-    
+
+
+
+    //جلب البيانات من جوجل شيت
     document.addEventListener('DOMContentLoaded', fetchGoogleSheetData);
+        
+
+
+    //دالة تغيير حجم الخط لاسم المنتج        
+    function updateFontSize(){
+        if(window.innerWidth <= 768){
+            const names = document.querySelectorAll('.card .name');
+            names.forEach(name => {
+                let fontSize = 3.5;   
+                while (name.offsetWidth >= name.parentElement.offsetWidth) {       
+                    fontSize -= 0.1;
+                    name.style.fontSize = fontSize + 'vw';         
+                }//while
+            })//forEach
+        }//if
+    }//updateFontSize()
+
+
+    window.addEventListener('resize', updateFontSize);
+        
+        
 </script>
 </html>
