@@ -314,7 +314,11 @@
 
             //تصغير الخط عندما يكون الاسم اكبر من عرض البطاقة
             //alert(window.innerWidth)
-            updateFontSize()
+            if (localView == 'cards-view') {
+              requestAnimationFrame(() => {
+              updateFontSize();
+            });
+            }
 
 
         }catch (error) {
@@ -346,6 +350,12 @@
     }//if
 
     localView = document.body.className;
+
+    if (localView == 'cards-view') {
+    requestAnimationFrame(() => {
+        updateFontSize();
+    });
+    }
 
     localStorage.setItem('localView',localView);
 
