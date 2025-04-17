@@ -171,7 +171,38 @@
         .table-view #view { background-color: lightgreen; }
         
         
-        
+        /* loader */
+.loader {
+  width: 25vw;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-color: #ccc #0000;
+  animation: l16 1s infinite linear;
+  margin:25vh auto;
+}
+.loader::before,
+.loader::after {    
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+}
+.loader::before {
+  border-color: #f03355 #0000;
+  animation: inherit; 
+  animation-duration: .5s;
+  animation-direction: reverse;
+}
+.loader::after {
+  margin: 8px;
+}
+@keyframes l16 { 
+  100%{transform: rotate(1turn)}
+}
+        /*loader */
         
         
         
@@ -253,6 +284,7 @@
             </thead>
             <tbody id="tbody"></tbody>
         </table>
+    <div class="loader"></div>
 </body>
 <script>
         
@@ -307,6 +339,8 @@
                     rows += row;
                 }//if
             }//for
+
+            hideLoader();
         
             document.getElementById('cards').innerHTML = cards;
             document.getElementById('tbody').innerHTML = rows;
@@ -384,6 +418,18 @@
 
 
     window.addEventListener('resize', updateFontSize);
+
+
+    function showLoader(){
+
+document.querySelector('.loader').style.display = 'grid';
+
+        }
+        
+        function hideLoader(){
+            document.querySelector('.loader').style.display = 'none';
+            
+        }
         
         
 </script>
