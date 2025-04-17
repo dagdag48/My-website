@@ -161,11 +161,7 @@
             
         }/* table */
         
-        .cards-view #cards { display: flex; }
-        .cards-view #table { display: none; }
-
-        .table-view #cards { display: none; }
-        .table-view #table { display: block; }
+        
 
         .cards-view #view { background-color: yellow; }
         .table-view #view { background-color: lightgreen; }
@@ -262,7 +258,7 @@
             
     </style>
 </head>
-<body class="cards-view">
+<body>
     <div id="header">
         <h1>محل الإخوة للبيع بالتقسيط</h1>
         <h1 id="phone">اتصل بنا : <a href="tel:0770606010">0770606010</a> أو <a href="tel:0553565223">0553565223</a></h1>
@@ -271,165 +267,188 @@
             <h1 id="note">ملاحظة : الأسعار ليست ثابثة</h1>
             <h1 id="view" onclick="view(true)">تغيير طريقة العرض</h1>
     </div>
-    <div id="cards"></div>
-        <table id="table">
-            <thead>
-                <tr>
-                    <th>الشركة</th>
-                    <th>الاسم</th>
-                    <th>السعر</th>
-                    <th>الدفعة</th>
-                    <th>كل شهر</th>
-                </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
+    <div id="container"></div>
     <div class="loader"></div>
 </body>
+       
 <script>
-        
-    async function fetchGoogleSheetData() {
-        try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbyjTFxSTI6RoXpgbMYcvHyQvwu-Y9UUcQmD8IroQoiip1A3Ce2VGYNuIVPkZ27ZVxWg/exec");
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
 
-            const data = await response.json();
+window.addEventListener('resize',updateFontSize);
 
-            let cards = '';
-            let rows = '';
-        
-            for(var i = 0 ; i < data.length; i++){
-        
-                if(data[i][3]){
-            
-                    const company = data[i][0];
-                    const name = data[i][1] + ' ' + data[i][2];
-                    const price = data[i][3].toLocaleString();
-                    const first = data[i][4].toLocaleString();
-                    const monthly = data[i][5].toLocaleString();
-                    
-                    
-                        //البطاقات          
-                    const card =`
-                        <div class="card">
-                            <h1 class="company">${company}</h1>
-                            <h1 class="name">${name}</h1>
-                            <h2 class="price total">السعر: <span>${price} دج</span></h2>
-                            <h2 class="price first">الدفعة: <span>${first} دج</span></h2>
-                            <h2 class="price monthly">كل شهر: <span>${monthly} دج</span></h2>
-                        </div>
-                    `
-                    cards += card;
+let localView = localStorage.getItem('localView') ?? 'cards-view';
+document.body.className = localView;
+let data = '';
+const container = document.getElementById('container');
 
-
-                        //صفوف الجدول          
-                    let row = `
-                        <tr>
-                            <td class="company">${company}</td>
-                            <td class="name">${name}</td>
-                            <td class="price total">${price}</td>
-                            <td class="price first">${first}</td>
-                            <td class="price monthly">${monthly}</td>
-                        </tr>
-                    `
-                    
-                    rows += row;
-                }//if
-            }//for
-
-            hideLoader();
-        
-            document.getElementById('cards').innerHTML = cards;
-            document.getElementById('tbody').innerHTML = rows;
-
-
-            //تصغير الخط عندما يكون الاسم اكبر من عرض البطاقة
-            //alert(window.innerWidth)
-            if (localView == 'cards-view') {
-              requestAnimationFrame(() => {
-              updateFontSize();
-            });
-            }
-
-
-        }catch (error) {
-            console.error("حدث خطأ أثناء جلب البيانات:", error.message);
-            alert(error.message)
-        }
     
+fetchGoogleSheetData().then(response => {
+    data = response;
+    fillData();
+    hideLoader();    
+});
+
+
+
+
+function fillData(){
+    
+    if (localView == 'cards-view'){
+        cardView(data);
+    }else{
+        tableView(data);
+    }
+    
+}
+
+
+
+
+function view(){
+
+    showLoader();    
+            
+    localView = localView == 'cards-view' ? 'table-view' : 'cards-view';
+    
+    document.body.className = localView;
+    
+    fillData();
+    
+    hideLoader();
+    localStorage.setItem('localView',localView);
+
+}//view()
+
+
+
+
+
+
+        
+    async function fetchGoogleSheetData(){
+    
+        const url = "https://script.google.com/macros/s/AKfycbyjTFxSTI6RoXpgbMYcvHyQvwu-Y9UUcQmD8IroQoiip1A3Ce2VGYNuIVPkZ27ZVxWg/exec";
+        try{
+            const response = await fetch(url);
+    
+            if (!response.ok){
+                throw new Error("HTTP error " + response.status);
+            }//if
+        
+        return await response.json();
+
+    }//fetch
+    
+    catch(error) {
+        alert(error.message);
+        console.error(error.message);
+    }//catch
     
     }//fetchGoogleSheetData()
     
-
-
-    //تخزين الشكل في lolacStotage    
-    let localView = localStorage.getItem('localView');
-    
-    if(localView !== null){
-        document.body.className = localView;
-    }//if
     
     
-    
-       
-    //دالة تغيير الشكل    
-    function view(toggle = false){
-    
-    if(toggle){
-        document.body.classList.toggle('table-view');
-        document.body.classList.toggle('cards-view');
-    }//if
-
-    localView = document.body.className;
-
-    if (localView == 'cards-view') {
-    requestAnimationFrame(() => {
-        updateFontSize();
-    });
-    }
-
-    localStorage.setItem('localView',localView);
-
-    }//view()
 
 
-
-    //جلب البيانات من جوجل شيت
-    document.addEventListener('DOMContentLoaded', fetchGoogleSheetData);
+//دالة تغيير حجم الخط لاسم المنتج        
+        function updateFontSize(){
         
+            if(window.innerWidth <= 768 && localView == 'cards-view'){
 
+const names = document.querySelectorAll('.card .name');
 
-    //دالة تغيير حجم الخط لاسم المنتج        
-    function updateFontSize(){
-        if(window.innerWidth <= 768){
-            const names = document.querySelectorAll('.card .name');
-            names.forEach(name => {
-                let fontSize = 3.5;   
-                while (name.offsetWidth >= name.parentElement.offsetWidth) {       
-                    fontSize -= 0.1;
-                    name.style.fontSize = fontSize + 'vw';         
-                }//while
-            })//forEach
-        }//if
-    }//updateFontSize()
+names.forEach(name => {
+  let fontSize = 3.5;
+  
+  while (name.offsetWidth >= name.parentElement.offsetWidth && fontSize > 0) {
+  /*console.log(name.textContent)
+  console.log('name:'+name.offsetWidth)
+  console.log('card:'+name.parentElement.offsetWidth)*/
+    fontSize -= 0.1;
+    name.style.fontSize = fontSize + 'vw';
+    
+  }//while
+});//forEach
+}//if
 
-
-    window.addEventListener('resize', updateFontSize);
-
-
-    function showLoader(){
-
+        }//updateFontSize()
+        
+        
+        
+        
+        
+        
+        function showLoader(){
 document.querySelector('.loader').style.display = 'grid';
-
         }
         
         function hideLoader(){
-            document.querySelector('.loader').style.display = 'none';
-            
+document.querySelector('.loader').style.display = 'none';           
         }
+        
+        
+        
+            
+        
+        function extractData(data) {
+  return data
+    .filter(row => row[3]) // لازم يحتوي على سعر
+    .map(row => ({
+      company: row[0],
+      name: row[1] + ' ' + row[2],
+      price: row[3].toLocaleString(),
+      first: row[4].toLocaleString(),
+      monthly: row[5].toLocaleString()
+    }));
+}
+
+
+
+function cardView(data) {
+  const parsed = extractData(data);
+  const cards = parsed.map(({ company, name, price, first, monthly }) => `
+    <div class="card">
+      <h1 class="company">${company}</h1>
+      <h1 class="name">${name}</h1>
+      <h2 class="price total">السعر: <span>${price} دج</span></h2>
+      <h2 class="price first">الدفعة: <span>${first} دج</span></h2>
+      <h2 class="price monthly">كل شهر: <span>${monthly} دج</span></h2>
+    </div>
+  `).join('');
+
+  container.innerHTML = `<div id="cards">${cards}</div>`;
+  updateFontSize();
+}
+
+
+
+
+function tableView(data) {
+  const parsed = extractData(data);
+  const rows = parsed.map(({ company, name, price, first, monthly }) => `
+    <tr>
+      <td class="company">${company}</td>
+      <td class="name">${name}</td>
+      <td class="price total">${price}</td>
+      <td class="price first">${first}</td>
+      <td class="price monthly">${monthly}</td>
+    </tr>
+  `).join('');
+
+  container.innerHTML = `
+    <table id="table">
+      <thead>
+        <tr>
+          <th>الشركة</th>
+          <th>الاسم</th>
+          <th>السعر</th>
+          <th>الدفعة</th>
+          <th>كل شهر</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">${rows}</tbody>
+    </table>
+  `;
+}
         
         
 </script>
