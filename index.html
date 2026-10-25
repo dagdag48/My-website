@@ -262,8 +262,9 @@
         <h1 id="phone">اتصل بنا : <a href="tel:0770606010">0770606010</a> أو <a href="tel:0553565223">0553565223</a></h1>
         <h1 id="map"><a href="https://www.google.com/maps/place/PHQ5%2B67J+GSM+BENABDALLAH,+W13%D8%8C+%D8%BA%D9%84%D9%8A%D8%B2%D8%A7%D9%86%E2%80%AD/@35.7387637,0.5584426,15z/data=!4m6!3m5!1s0x12819d6f668e333f:0x32b0f94e9fb77706!8m2!3d35.7387637!4d0.5584426!16s%2Fg%2F11m7v5ncp6">المحل متواجد في الڤرابة مقابل بريد الجزائر</a></h1>
         <h1 id="fb"><a href="https://www.facebook.com/share/16VVxiZzX6/">Facebook : Gsm benabdallah</a></h1>        
-            <h1 id="note">ملاحظة : الأسعار ليست ثابثة</h1>
-            <h1 id="view" onclick="view(true)">تغيير طريقة العرض</h1>
+        <h1 id="note">ملاحظة : الأسعار ليست ثابثة</h1>
+        <h1 id="date"></h1>
+        <h1 id="view" onclick="view(true)">تغيير طريقة العرض</h1>
     </div>
     <div id="container"></div>
     <div class="loader"></div>
@@ -280,7 +281,8 @@ const container = document.getElementById('container');
 
     
 fetchGoogleSheetData().then(response => {
-    data = response;
+    data = response.data;
+    document.getElementById('date').textContent = response.date;
     fillData();
     hideLoader();    
 });
